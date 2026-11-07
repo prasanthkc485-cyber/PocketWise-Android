@@ -1,0 +1,23 @@
+name: Check PocketWise Android Project
+
+on:
+  workflow_dispatch:
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check ZIP file
+        run: |
+          unzip -l PocketwiseAndroidproject.zip
+
+      - name: Extract project
+        run: |
+          mkdir project
+          unzip -q PocketwiseAndroidproject.zip -d project
+          echo "Project structure:"
+          find project -maxdepth 5 -type f | sort
