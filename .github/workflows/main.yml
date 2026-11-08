@@ -13,11 +13,12 @@ jobs:
 
       - name: Check ZIP file
         run: |
-          unzip -l PocketwiseAndroidproject.zip
+          ls -la
+          unzip -l PocketWiseAndroid-project.zip
 
       - name: Extract project
         run: |
           mkdir project
-          unzip -q PocketwiseAndroidproject.zip -d project
-          echo "Project structure:"
-          find project -maxdepth 5 -type f | sort
+          unzip -q PocketWiseAndroid-project.zip -d project
+          echo "PROJECT FILE STRUCTURE:"
+          find project -maxdepth 8 -type f | sort
