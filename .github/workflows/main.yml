@@ -1,4 +1,4 @@
-name: Check PocketWise Android Project
+name: Inspect PocketWise Build Settings
 
 on:
   workflow_dispatch:
@@ -11,14 +11,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Check ZIP file
+      - name: Extract Android project
         run: |
-          ls -la
-          unzip -l PocketWiseAndroid-project.zip
-
-      - name: Extract project
-        run: |
-          mkdir project
           unzip -q PocketWiseAndroid-project.zip -d project
-          echo "PROJECT FILE STRUCTURE:"
-          find project -maxdepth 8 -type f | sort
+
+      - name: Display Gradle configuration
+        run: |
+          cd project/PocketWiseAndroid
+          echo "ROOT BUILD GRADLE"
+          cat build.gradle
+          echo "APP BUILD GRADLE"
+          cat app/build.gradle
+          echo "GRADLE PROPERTIES"
+          cat gradle.properties
+          echo "SETTINGS GRADLE"
+          cat settings.gradle
+          echo "ALL PROJECT FILES"
+          find . -type f | sort
